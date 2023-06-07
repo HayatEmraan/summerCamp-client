@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { set, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   AiFillEye,
   AiFillEyeInvisible,
@@ -12,8 +12,10 @@ import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
 
-
 const SignUp = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
   const {
     createUser,
     signInWithGoogle,
@@ -58,6 +60,7 @@ const SignUp = () => {
             updateUserProfile(data.name, dataImg.data.url);
             reset();
             toast.success("Successfully SignUp!");
+            navigate(from, { replace: true });
           })
           .catch((err) => {
             toast.error("Something went wrong. Please try again!");
@@ -71,8 +74,12 @@ const SignUp = () => {
   };
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-      .then((res) => console.log(res))
+      .then((res) => {
+        navigate(from, { replace: true });
+        toast.success("Authentication Successful!");
+      })
       .catch((err) => {
+        toast.error("Something went wrong. Please try again!");
         setLoading(false);
       });
   };

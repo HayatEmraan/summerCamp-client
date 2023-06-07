@@ -18,3 +18,16 @@
   font-size: 24px;
   font-weight: 700;
 }
+
+.team-bg{
+  background-image: url("/src/assets/teamBG/team-bg-1.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+.team-bg:hover{
+  background-image: url("/src/assets/teamBG/glow-bg.png");
+}
+
+.footer-wave{
+  background-color: #FFFBEE;
+}

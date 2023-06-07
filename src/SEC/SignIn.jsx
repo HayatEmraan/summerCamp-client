@@ -1,16 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { set, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { AuthContext } from "../context/AuthContext";
 import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
 const SignIn = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
   const { signIn, signInWithGoogle, resetPassword, loading, setLoading } =
     useContext(AuthContext);
-  console.log(loading);
+  const emailRef = useRef(null);
+  const resetPasswordHandler = () => {
+    if (emailRef) {
+      resetPassword(emailRef.current.value)
+        .then((res) => {
+          toast.success("Reset password link sent to your email!");
+          setLoading(false);
+        })
+        .catch((err) => {
+          toast.error("Something went wrong. Please try again!");
+          setLoading(false);
+        });
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -20,18 +36,24 @@ const SignIn = () => {
   const [eyeActive, setEyeActive] = useState(false);
   const onSubmit = (data) => {
     signIn(data.email, data.password)
-        .then((res) => {
-            toast.success("Successfully logged In!");
-            console.log(res)
-        })
-      .catch((err) => console.log(err));
+      .then((res) => {
+        toast.success("Successfully logged In!");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        toast.error("Something went wrong. Please try again!");
+        setLoading(false);
+      });
   };
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-      .then((res) => console.log(res))
+      .then((res) => {
+        navigate(from, { replace: true });
+        toast.success("Authentication Successful!");
+      })
       .catch((err) => {
+        toast.error("Something went wrong. Please try again!");
         setLoading(false);
-        console.log(err);
       });
   };
   return (
@@ -61,6 +83,7 @@ const SignIn = () => {
               className="border-b border-gray-400 focus:outline-none"
               {...register("email", { required: true })}
               placeholder="Email"
+              ref={emailRef}
             />
             <div className="relative">
               <input
@@ -81,7 +104,11 @@ const SignIn = () => {
                 )}
               </div>
             </div>
-            {errors.exampleRequired && <span>This field is required</span>}
+            <div className="text-end" onClick={resetPasswordHandler}>
+              <small className="hover:underline cursor-pointer hover:text-rose-500 text-gray-600">
+                Reset Password
+              </small>
+            </div>
             {loading ? (
               <div className="bg-black text-white text-3xl rounded-md">
                 <CgSpinnerTwo className="p-1 animate-spin mx-auto"></CgSpinnerTwo>
