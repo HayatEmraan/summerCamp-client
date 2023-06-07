@@ -5,6 +5,7 @@ import Not404 from "../pages/Not404/Not404";
 import SignIn from "../SEC/SignIn";
 import SignUp from "../SEC/SignUp";
 import Courses from "../pages/Courses/Courses";
+import About from "../pages/About/About";
 
 export const Routes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const Routes = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

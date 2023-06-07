@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.gradient-custom {
+  background: radial-gradient(
+    126.75% 133.09% at 50% 49.99%,
+    #dc8d48 0%,
+    #d38745 4.19%,
+    #91572b 36.95%,
+    #5e3116 66.01%,
+    #3f1a0a 87.87%,
+    #331105 100%
+  );
+  border-radius: 8px;
+  color: white;
+  padding: 10px 24px;
+  font-size: 24px;
+  font-weight: 700;
+}
