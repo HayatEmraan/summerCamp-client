@@ -6,6 +6,7 @@ import SignIn from "../SEC/SignIn";
 import SignUp from "../SEC/SignUp";
 import Courses from "../pages/Courses/Courses";
 import About from "../pages/About/About";
+import Instructors from "../pages/Instructors/Instructors";
 
 export const Routes = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const Routes = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/instructors",
+        element: <Instructors />,
       },
       {
         path: "/about",

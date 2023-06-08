@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import bg_white from "../../assets/teamBG/team-bg-1.png";
-import bg_glow from "../../assets/teamBG/glow-bg.png";
 const About = () => {
   const { data, error, refetch } = useQuery({
     queryKey: ["team"],

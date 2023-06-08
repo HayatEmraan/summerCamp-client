@@ -13,7 +13,7 @@ const Header = () => {
             <ul className="font-cinzel flex gap-12">
               <Link to="/">Home</Link>
               <Link to="/courses">Courses</Link>
-              <Link to="/courses">Instructors</Link>
+              <Link to="/instructors">Instructors</Link>
               <Link to="/about">About</Link>
             </ul>
           </div>
