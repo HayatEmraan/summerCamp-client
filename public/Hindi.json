@@ -1,0 +1,37 @@
+[
+  {
+    "courseName": "Hindi to English: Beginner Level",
+    "title": "Learn Basic Hindi to English Translation",
+    "teacherName": "Amit Patel",
+    "price": 29.99,
+    "thumbnailImage": "https://play-lh.googleusercontent.com/5MznfDvh4jckV6qzWM2mSVlwEoZIq9MhH6CHZBUdEa72hVU74LkZClkBrG2PNDbro6KZ=w240-h480-rw"
+  },
+  {
+    "courseName": "Hindi to English: Intermediate Level",
+    "title": "Master Hindi to English Translation",
+    "teacherName": "Senthil Kumar",
+    "price": 49.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIvel_L-tDZIcG9hHv7v6Rpjq7Kzft8Umoeg3rPswUfdcskpaiJGiOvNOVbl4xFu_bOZw&usqp=CAU"
+  },
+  {
+    "courseName": "Hindi to English: Advanced Level",
+    "title": "Advanced Hindi to English Translation Techniques",
+    "teacherName": "Amit Patel",
+    "price": 69.99,
+    "thumbnailImage": "https://play-lh.googleusercontent.com/FcTYNByu7DxS2akOzTyKOHJp4ldmaqzGt7q0YIxBRbvEJqVnBtnlMJlok5fiu8vadw"
+  },
+  {
+    "courseName": "Hindi to English: Business Communication",
+    "title": "Effective Business Communication in English",
+    "teacherName": "Mohammed Ahmed",
+    "price": 59.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIvel_L-tDZIcG9hHv7v6Rpjq7Kzft8Umoeg3rPswUfdcskpaiJGiOvNOVbl4xFu_bOZw&usqp=CAU"
+  },
+  {
+    "courseName": "Hindi to English: Conversational Skills",
+    "title": "Fluent Conversations in Hindi and English",
+    "teacherName": "Rajesh Kumar",
+    "price": 39.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIZqFahfeVyxH5T5zTZ-iYJn2YWMtVa8Vcgg&usqp=CAU"
+  }
+]

@@ -22,11 +22,11 @@ const Footer = () => {
             <h2 className="mb-2 text-slate-700">
               Online Live Skill Development <br /> Platform
             </h2>
-            <h2 className="font-semibold text-xl">Download App</h2>
+            {/* <h2 className="font-semibold text-xl">Download App</h2>
             <div className="flex text-5xl gap-1 my-2">
               <FaAppStore className="border px-1 bg-black text-white rounded-md"></FaAppStore>
               <FaWindows className="border px-1  rounded-md"></FaWindows>
-            </div>
+            </div> */}
             <h2>Follow Us</h2>
             <div className="flex text-5xl gap-1">
               <AiFillFacebook className="p-1 border rounded-lg"></AiFillFacebook>

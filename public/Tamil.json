@@ -1,0 +1,16 @@
+[
+  {
+    "courseName": "Tamil to English: Beginner Level",
+    "title": "Learn Basic Tamil to English Translation",
+    "teacherName": "Senthil Kumar",
+    "price": 29.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTVyRuzItBFg9xam_CcUfZ9ld7ysItUjDe8MgzV_3G2IGtIu5WdbCbxLONx6pPQ3PoCLY&usqp=CAU"
+  },
+  {
+    "courseName": "Tamil to English: Conversational Skills",
+    "title": "Fluent Conversations in Tamil and English",
+    "teacherName": "Amit Patel",
+    "price": 39.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTmTsu6n4L7mzaTdXppejPA0UeS0EWzsaGmtSSdWrS_C-EGkLz0NcaAUbk81lk_NpEgUs&usqp=CAU"
+  }
+]

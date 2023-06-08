@@ -15,7 +15,7 @@ const About = () => {
         .catch((err) => console.log(err)),
   });
   return (
-    <div className="bg-black">
+    <div className="bg-black pt-24">
       <h2 className="text-6xl text-center mb-24 text-[#D0ABFF]">
         Meet Our Team_
       </h2>

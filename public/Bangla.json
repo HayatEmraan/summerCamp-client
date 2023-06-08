@@ -1,0 +1,36 @@
+[
+  {
+    "courseName": "Bangla to English: Beginner Level",
+    "title": "Learn Basic Bangla to English Translation",
+    "teacherName": "Emily Davis",
+    "price": 29.99,
+    "thumbnailImage": "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/108212719/original/6ce0b540330174005757dbb74469d137b9db00a1/do-english-to-bengali-or-bengali-to-english-translation.jpg"
+  },
+  {
+    "courseName": "Bangla to English: Intermediate Level",
+    "title": "Master Bangla to English Translation",
+    "teacherName": "Mohammed Ahmed",
+    "price": 49.99,
+    "thumbnailImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDTE0vj6qlsOW6h5War4uOTh8-HT5JO231k4OdYkGTKnC8320SWAUj4e-UT-YUuM7j8Rg&usqp=CAU"
+  },
+  {
+    "courseName": "Bangla to English: Advanced Level",
+    "title": "Advanced Bangla to English Translation Techniques",
+    "teacherName": "Emily Davis",
+    "price": 69.99,
+    "thumbnailImage": "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/149609303/original/3cf83d85bb606d940073126f9f37d120083f8f78/ranslate-bengali-to-english-and-english-to-bengali.jpg"
+  },{
+    "courseName": "Bangla to English: Business Communication",
+    "title": "Effective Business Communication in English",
+    "teacherName": "David Anderson",
+    "price": 59.99,
+    "thumbnailImage": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/119042166/original/2c9911daea59d16fdc9dd7cda1ae364e704cd06f/translate-english-to-bengali.jpg"
+  },
+  {
+    "courseName": "Bangla to English: Conversational Skills",
+    "title": "Fluent Conversations in Bangla and English",
+    "teacherName": "Mohammed Ahmed",
+    "price": 39.99,
+    "thumbnailImage": "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/147712314/original/05535bcd17b9cacd831f64c34a59daff39d818a9/translate-from-english-to-bengali-or-bangla-to-english.jpg"
+  }
+]

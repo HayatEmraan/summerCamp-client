@@ -1,0 +1,25 @@
+[
+  {
+    "name": "John Doe",
+    "feedback": "The English course was excellent. I learned a lot! I am proud to say that after a few months of taking this course.",
+    "photoUrl": "https://cdn.hswstatic.com/gif/play/0b7f4e9b-f59c-4024-9f06-b3dc12850ab7-1920-1080.jpg",
+    "feedbackDate": "2023-06-01"
+  },
+  {
+    "name": "Jane Smith",
+    "feedback": "I really enjoyed the English lessons. The material was well-structured and easy to understand.",
+    "feedbackDate": "2023-06-03"
+  },
+  {
+    "name": "Alex Johnson",
+    "feedback": "I found the English course very helpful in improving my speaking skills. Highly recommended!",
+    "photoUrl": "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "feedbackDate": "2023-06-05"
+  },
+  {
+    "name": "Emily Williams",
+    "feedback": "The online language learning platform has been a game-changer for me. The advice is practical, and examples highly relatable",
+    "photoUrl": "https://images.unsplash.com/photo-1562159278-1253a58da141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "feedbackDate": "2023-06-07"
+  }
+]
