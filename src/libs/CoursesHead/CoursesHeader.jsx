@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Courses from "./Courses";
 import {MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
 const CoursesHeader = () => {
+    const [selectCategory, setSelectCategory] = useState(null);
+    const handleCategory = (e) => { 
+        setSelectCategory(e.target.value);
+    };
   return (
     <div className="mx-auto container my-12">
       <div className="flex justify-between items-center">
@@ -28,8 +32,13 @@ const CoursesHeader = () => {
             </div>
           </div>
           <div>
-            <select className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
+            <select
+              className="select select-bordered w-full max-w-xs"
+              defaultValue={"DEFAULT"}
+              name="categoryBtn"
+              onChange={handleCategory}
+            >
+              <option disabled value="DEFAULT">
                 Category
               </option>
               <option>Bangla</option>
@@ -42,7 +51,7 @@ const CoursesHeader = () => {
         </div>
       </div>
       <div className="my-6">
-        <Courses></Courses>
+        <Courses selectCategory={selectCategory}></Courses>
       </div>
     </div>
   );

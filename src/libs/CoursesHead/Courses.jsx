@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import NoResults from "../Tabs/NoResults";
 
-const Courses = () => {
+const Courses = ({ selectCategory }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetch("http://localhost:3000/main")
       .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-  console.log(data);
+      .then((data) => {
+        selectCategory
+          ? setData(data.filter((fl) => selectCategory === fl.category))
+          : setData(data);
+      });
+  }, [selectCategory]);
   return (
     <div>
       <div className="border p-8 rounded-md">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
-          {data &&
+        <div
+          className={`${
+            data && data.length > 0
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2"
+              : ""
+          }`}
+        >
+          {data && data.length > 0 ? (
             data.map((item, index) => {
               return (
                 <div
@@ -42,7 +52,10 @@ const Courses = () => {
                   </div>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <NoResults></NoResults>
+          )}
         </div>
       </div>
     </div>

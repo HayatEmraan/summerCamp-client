@@ -1,33 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import NoResults from "./NoResults";
 
 const TabsData = () => {
   const [data, setData] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("category");
+  console.log(searchQuery);
   useEffect(() => {
     fetch("http://localhost:3000/main")
       .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+      .then((data) => {
+        searchQuery && searchQuery !== "All"
+          ? setData(data.filter((fl) => searchQuery === fl.category))
+          : setData(data);
+      });
+  }, [searchQuery]);
   console.log(data);
   return (
     <div>
       <div className="border p-8 rounded-md">
-        <h2 className="text-2xl font-semibold mb-3">Expand your career opportunities with Python</h2>
+        <h2 className="text-2xl font-semibold mb-3">
+          Expand your career opportunities with English
+        </h2>
         <p className="w-3/4 mb-4">
-          Take one of Udemy’s range of Python courses and learn how to code
-          using this incredibly useful language. Its simple syntax and
-          readability makes Python perfect for Flask, Django, data science, and
-          machine learning. You’ll learn how to build everything from games to
-          sites to apps. Choose from a range of courses that will appeal to
-              </p>
-              <Link to="/courses" className="btn btn-outline mb-4">Explore Courses</Link>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {data &&
+          Enroll in one of English Academy's diverse language courses and master
+          the implementation of this incredibly useful language. Choose from a
+          wide selection of courses that cater to various interests and
+          aspirations, allowing you to excel in your chosen field.
+        </p>
+        <Link to="/courses" className="btn btn-outline mb-4">
+          Explore Courses
+        </Link>
+        <div
+          className={`${
+            data && data.length > 0
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              : ""
+          }`}
+        >
+          {data && data.length > 0 ? (
             data.map((item, index) => {
               return (
-                <div>
+                <div key={index}>
                   <img
                     style={{ height: "187px", width: "272px" }}
                     src={item.thumbnailImage}
@@ -43,7 +60,10 @@ const TabsData = () => {
                   <h2>${item.price}</h2>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <NoResults></NoResults>
+          )}
         </div>
       </div>
     </div>
