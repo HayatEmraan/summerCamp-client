@@ -1,18 +1,18 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { AuthContext } from "../context/AuthContext";
 import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
+import useAuth from "../Hooks/useAuth";
 const SignIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
   const { signIn, signInWithGoogle, resetPassword, loading, setLoading } =
-    useContext(AuthContext);
+    useAuth();
   const emailRef = useRef(null);
   const resetPasswordHandler = () => {
     if (emailRef) {

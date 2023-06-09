@@ -1,10 +1,19 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo-transparent.png";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import useAuth from "../../Hooks/useAuth";
+import { useCart } from "../../Hooks/useCart";
+import { CiLogout } from "react-icons/ci";
+import {
+  MdOutlineDashboardCustomize,
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
+  const { cart } = useCart();
+  const [isActive, setActive] = useState(false);
   return (
     <div className="shadow z-10">
       <div className="mx-auto container">
@@ -22,11 +31,17 @@ const Header = () => {
           </div>
           <div className="space-x-12 font-inter">
             {user ? (
-              <div className="flex items-center gap-2">
-                <Link to="/dashboard/cart" className=" text-2xl gap-0 me-4 relative">
+              <div
+                className="flex items-center gap-2 cursor-pointer relative"
+                onClick={() => setActive(!isActive)}
+              >
+                <Link
+                  to="/dashboard/cart"
+                  className=" text-2xl gap-0 me-4 relative"
+                >
                   <AiOutlineShoppingCart></AiOutlineShoppingCart>
                   <small className="absolute -top-3 left-3 bg-red-600 rounded-full py-0 text-sm px-1 text-white">
-                    {/* {(data && data?.length) || 0} */} 0
+                    {(cart && cart?.length) || 0}
                   </small>
                 </Link>
                 {user ? (
@@ -39,6 +54,36 @@ const Header = () => {
                   ""
                 )}
                 {user?.displayName}
+
+                {isActive ? (
+                  <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+                ) : (
+                  <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
+                )}
+                {isActive && (
+                  <div className="absolute -bottom-32 right-0 border p-1 shadow-md rounded-md px-2 opacity-100 bg-[#FFFFFF]">
+                    <div>
+                      <div className="mt-2 hover:bg-[#FFE699]">
+                        <Link
+                          to="/dashboard"
+                          className="border border-[#ffc000] uppercase font-semibold px-8 py-2 rounded-md flex items-center gap-3"
+                        >
+                          <MdOutlineDashboardCustomize
+                            size={20}
+                          ></MdOutlineDashboardCustomize>
+                          Dashboard
+                        </Link>
+                      </div>
+                      <div
+                        onClick={logOut}
+                        className="uppercase flex mt-4 items-center gap-2"
+                      >
+                        <CiLogout size={20}></CiLogout>
+                        LogOut
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <Link

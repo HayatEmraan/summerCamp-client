@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -55,9 +56,22 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("current user", currentUser);
-      setLoading(false);
+      if (currentUser) {
+        fetch("http://localhost:3000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: currentUser.email }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Cookies.set("access_token", data.token, { expires: 7, path: "/" });
+            setUser(currentUser);
+            console.log("current user", currentUser);
+            setLoading(false);
+          });
+      }
     });
     return () => {
       return unsubscribe();

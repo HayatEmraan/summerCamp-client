@@ -1,9 +1,8 @@
 import React from "react";
 import payments from "../../assets/payment/support.png";
 import { BiMap } from "react-icons/bi";
-import {} from "react-icons/io";
 import logo from "../../assets/logo/logo-transparent.png";
-import { FaAppStore, FaPhone, FaWindows } from "react-icons/fa";
+import { FaPhone} from "react-icons/fa";
 import {
   AiFillFacebook,
   AiFillInstagram,

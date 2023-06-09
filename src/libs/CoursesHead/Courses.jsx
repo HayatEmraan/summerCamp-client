@@ -1,12 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import NoResults from "../Tabs/NoResults";
-import { AuthContext } from "../../context/AuthContext";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
+import { useCart } from "../../Hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 const Courses = ({ selectCategory }) => {
+  const axiosSecure = useAxiosSecure();
+  const { refetch } = useCart();
   const [data, setData] = useState(null);
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user } = useAuth();
   useEffect(() => {
     fetch("http://localhost:3000/courses")
       .then((res) => res.json())
@@ -16,28 +23,36 @@ const Courses = ({ selectCategory }) => {
           : setData(data);
       });
   }, [selectCategory]);
-  const handleCart = (id) => { 
+  console.log(data);
+  const handleCart = (id) => {
     if (!user) {
-      return;
+      toast.error("Please Login First!");
+      return navigate("/signin");
     }
-    else {
-      fetch(`http://localhost:3000/courses/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        fetch(`http://localhost:3000/cart/${user.uid}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
+    axiosSecure
+      .post("/order", {
+        oid: id._id,
+        email: user?.email,
+        price: id.price,
+        status: "pending",
+        category: id.category,
+        name: id.title,
+      })
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Successfully Added!", {
+            position: "top-right",
           });
+          refetch();
+        }
+      })
+      .catch((err) => {
+        toast.error("Something went wrong!", {
+          position: "top-right",
+        });
       });
-    }
-  }
+  };
+
   return (
     <div>
       <div className="border p-8 rounded-md">
@@ -72,7 +87,9 @@ const Courses = ({ selectCategory }) => {
                     <h2>Available Seats: {item.availableSits}</h2>
                   </div>
                   <div className="w-full text-center bg-purple-600 text-white rounded-lg text-2xl absolute bottom-0 left-0">
-                    <button onClick={()=> handleCart(item._id)}>Add to Cart</button>
+                    <button onClick={() => handleCart(item)}>
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               );
