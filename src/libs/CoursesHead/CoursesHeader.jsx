@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Courses from "./Courses";
-import {MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 const CoursesHeader = () => {
-    const [selectCategory, setSelectCategory] = useState(null);
-    const handleCategory = (e) => { 
-        setSelectCategory(e.target.value);
-    };
+  const [selectCategory, setSelectCategory] = useState(null);
+  const handleCategory = (e) => {
+    setSelectCategory(e.target.value);
+  };
+  const [sort, setSort] = useState(false);
   return (
     <div className="mx-auto container my-12">
       <div className="flex justify-between items-center">
@@ -17,10 +21,17 @@ const CoursesHeader = () => {
           />
         </div>
         <div className="flex gap-8 items-center">
-          <div className="flex items-center gap-1">
+          <div
+            className="flex items-center gap-1 cursor-pointer"
+            onClick={() => setSort(!sort)}
+          >
             <h2>Price</h2>
             <div>
-              <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+              {sort ? (
+                <MdOutlineKeyboardArrowUp className="text-red-700"></MdOutlineKeyboardArrowUp>
+              ) : (
+                <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+              )}
               <MdOutlineKeyboardArrowDown className="-mt-[6px]"></MdOutlineKeyboardArrowDown>
             </div>
           </div>
@@ -51,7 +62,7 @@ const CoursesHeader = () => {
         </div>
       </div>
       <div className="my-6">
-        <Courses selectCategory={selectCategory}></Courses>
+        <Courses selectCategory={selectCategory} sort={sort}></Courses>
       </div>
     </div>
   );

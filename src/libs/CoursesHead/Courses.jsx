@@ -8,22 +8,21 @@ import useAuth from "../../Hooks/useAuth";
 import { useCart } from "../../Hooks/useCart";
 import { useNavigate } from "react-router-dom";
 
-const Courses = ({ selectCategory }) => {
+const Courses = ({ selectCategory, sort }) => {
   const axiosSecure = useAxiosSecure();
   const { refetch } = useCart();
   const [data, setData] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
   useEffect(() => {
-    fetch("http://localhost:3000/courses")
+    fetch(`http://localhost:3000/courses?sort=${sort}`)
       .then((res) => res.json())
       .then((data) => {
         selectCategory
           ? setData(data.filter((fl) => selectCategory === fl.category))
           : setData(data);
       });
-  }, [selectCategory]);
-  console.log(data);
+  }, [selectCategory, sort]);
   const handleCart = (id) => {
     if (!user) {
       toast.error("Please Login First!");

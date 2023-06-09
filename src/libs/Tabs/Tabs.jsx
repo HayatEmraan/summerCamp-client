@@ -1,8 +1,8 @@
 import React from "react";
-import { categories } from "../../../public/categories";
 import TabsData from "./TabsData";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import queryString from "query-string";
+import { categories } from "./categories";
 
 const Tabs = () => {
   const [searchParams, setSearchParams] = useSearchParams();

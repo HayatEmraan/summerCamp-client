@@ -10,7 +10,6 @@ const Instructor = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  console.log(data);
   return (
     <div className="container mx-auto my-6">
       <div className="grid lg:grid-cols-7 mx-5">

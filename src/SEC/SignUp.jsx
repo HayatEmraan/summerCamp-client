@@ -46,7 +46,6 @@ const SignUp = () => {
     }
   }, [refConfirmPass, refPassword]);
   const onSubmit = (data) => {
-    console.log(data.image[0]);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`, {

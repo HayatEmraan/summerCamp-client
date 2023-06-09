@@ -16,7 +16,6 @@ const TabsData = () => {
   const [data, setData] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("category");
-  console.log(searchQuery);
   useEffect(() => {
     fetch("http://localhost:3000/main")
       .then((res) => res.json())
@@ -26,7 +25,7 @@ const TabsData = () => {
           : setData(data);
       });
   }, [searchQuery]);
-  console.log(data);
+
   return (
     <div>
       <div className="border p-8 rounded-md">
@@ -46,9 +45,19 @@ const TabsData = () => {
           {data && data.length > 0 ? (
             <Swiper
               navigation={true}
-              slidesPerView={6}
-              spaceBetween={15}
               modules={[Navigation]}
+              breakpoints={{
+                640: {
+                  width: 640,
+                  slidesPerView: 2,
+                  spaceBetween: 5,
+                },
+                768: {
+                  width: 768,
+                  slidesPerView: 3,
+                  spaceBetween: 5,
+                },
+              }}
             >
               {data.map((item, index) => {
                 return (

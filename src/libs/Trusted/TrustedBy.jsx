@@ -15,7 +15,7 @@ const TrustedBy = () => {
           skills fresh.
         </p>
       </div>
-      <div className="flex justify-between my-6">
+      <div className="lg:flex justify-between my-6 lg:my-6 grid grid-cols-3 justify-items-center">
         <img src={nasdaq} alt="" />
         <img src={volkswagen} alt="" />
         <img src={box} alt="" />
