@@ -1,4 +1,6 @@
+import queryString from "query-string";
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const Instructors = () => {
   const [data, setData] = useState(null);
@@ -7,7 +9,26 @@ const Instructors = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  console.log(data);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const handleCategory = (category) => {
+    let queryParams = {};
+    if (searchParams) {
+      queryParams = queryString.parse(searchParams.toString());
+    }
+    const createQuery = {
+      ...queryParams,
+      category: category,
+    };
+    const url = queryString.stringifyUrl(
+      {
+        url: "/",
+        query: createQuery,
+      },
+      { skipNull: true }
+    );
+    navigate(url);
+  };
   return (
     <div className="container mx-auto mb-12 mt-4 border p-12 rounded-lg">
       <h2 className="text-6xl text-center mb-24 text-[#D0ABFF]">
@@ -17,16 +38,24 @@ const Instructors = () => {
         {data &&
           data.map((item, index) => {
             return (
-              <div key={index} className="border shadow-md p-4 rounded-md">
+              <Link
+                to={`/instructor/${item.name.split(" ")[0]}_${
+                  item.name.split(" ")[1]
+                }`}
+                key={index}
+                className="border shadow-md p-4 rounded-md group"
+              >
                 <img
                   style={{ width: "260px", height: "178px" }}
-                  className="rounded-md"
+                  className="rounded-md group-hover:scale-110 transition duration-500 ease-in-out"
                   src={item.image}
                   alt=""
                 />
-                <h1 className="text-2xl font-inter my-2">{item.name}</h1>
+                <h1 className="text-2xl font-inter my-2 hover:underline">
+                  {item.name}
+                </h1>
                 <h1>{item.education}</h1>
-              </div>
+              </Link>
             );
           })}
       </div>

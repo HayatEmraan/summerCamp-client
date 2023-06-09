@@ -23,7 +23,7 @@ const About = () => {
             return (
               <div key={item._id} className="team-bg">
                 <img
-                  className="w-[187px] h-[284px] z-10 "
+                  className="w-[187px] h-[284px] z-10 object-cover"
                   src={item.profileImage}
                   alt=""
                 />

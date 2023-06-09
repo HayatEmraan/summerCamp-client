@@ -3,6 +3,14 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { Link, useSearchParams } from "react-router-dom";
 import NoResults from "./NoResults";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+// import required modules
+import { Navigation } from "swiper";
+import "./slide.css";
 
 const TabsData = () => {
   const [data, setData] = useState(null);
@@ -34,33 +42,36 @@ const TabsData = () => {
         <Link to="/courses" className="btn btn-outline mb-4">
           Explore Courses
         </Link>
-        <div
-          className={`${
-            data && data.length > 0
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-              : ""
-          }`}
-        >
+        <div>
           {data && data.length > 0 ? (
-            data.map((item, index) => {
-              return (
-                <div key={index}>
-                  <img
-                    style={{ height: "187px", width: "272px" }}
-                    src={item.thumbnailImage}
-                    alt=""
-                  />
-                  <h2 className="font-semibold">{item.title}</h2>
-                  <small>{item.teacherName}</small>
-                  <div className="flex gap-1">
-                    <small className="text-[#662e94] font-bold">4.6</small>
-                    <Rating style={{ maxWidth: 80 }} value={4.6} readOnly />
-                    <small className="text-slate-500">(100,100)</small>
-                  </div>
-                  <h2>${item.price}</h2>
-                </div>
-              );
-            })
+            <Swiper
+              navigation={true}
+              slidesPerView={6}
+              spaceBetween={15}
+              modules={[Navigation]}
+            >
+              {data.map((item, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <div>
+                      <img
+                        style={{ height: "187px", width: "272px" }}
+                        src={item.thumbnailImage}
+                        alt=""
+                      />
+                      <h2 className="font-semibold">{item.title}</h2>
+                      <small>{item.teacherName}</small>
+                      <div className="flex gap-1">
+                        <small className="text-[#662e94] font-bold">4.6</small>
+                        <Rating style={{ maxWidth: 80 }} value={4.6} readOnly />
+                        <small className="text-slate-500">(100,100)</small>
+                      </div>
+                      <h2>${item.price}</h2>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           ) : (
             <NoResults></NoResults>
           )}

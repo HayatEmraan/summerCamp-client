@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logo/logo-transparent.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="shadow z-10">
       <div className="mx-auto container">
@@ -18,13 +21,33 @@ const Header = () => {
             </ul>
           </div>
           <div className="space-x-12 font-inter">
-            <Link
-              to="/signin"
-              className="border py-2 px-4 rounded-lg hover:bg-[#FFE699] border-[#ffc000]"
-            >
-              Sign In
-            </Link>
-            {/* <Link to="/signup" className="border py-2 px-4 rounded-lg hover:bg-[#FFE699] border-[#ffc000]">Sign Up</Link> */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <Link to="/dashboard/cart" className=" text-2xl gap-0 me-4 relative">
+                  <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                  <small className="absolute -top-3 left-3 bg-red-600 rounded-full py-0 text-sm px-1 text-white">
+                    {/* {(data && data?.length) || 0} */} 0
+                  </small>
+                </Link>
+                {user ? (
+                  <img
+                    className="w-7 h-6 rounded-full"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                ) : (
+                  ""
+                )}
+                {user?.displayName}
+              </div>
+            ) : (
+              <Link
+                to="/signin"
+                className="border py-2 px-4 rounded-lg hover:bg-[#FFE699] border-[#ffc000]"
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>

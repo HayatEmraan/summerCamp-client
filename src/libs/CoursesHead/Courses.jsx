@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import NoResults from "../Tabs/NoResults";
+import { AuthContext } from "../../context/AuthContext";
 
 const Courses = ({ selectCategory }) => {
   const [data, setData] = useState(null);
+  const { user } = useContext(AuthContext);
   useEffect(() => {
-    fetch("http://localhost:3000/main")
+    fetch("http://localhost:3000/courses")
       .then((res) => res.json())
       .then((data) => {
         selectCategory
@@ -14,6 +16,28 @@ const Courses = ({ selectCategory }) => {
           : setData(data);
       });
   }, [selectCategory]);
+  const handleCart = (id) => { 
+    if (!user) {
+      return;
+    }
+    else {
+      fetch(`http://localhost:3000/courses/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        fetch(`http://localhost:3000/cart/${user.uid}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      });
+    }
+  }
   return (
     <div>
       <div className="border p-8 rounded-md">
@@ -48,7 +72,7 @@ const Courses = ({ selectCategory }) => {
                     <h2>Available Seats: {item.availableSits}</h2>
                   </div>
                   <div className="w-full text-center bg-purple-600 text-white rounded-lg text-2xl absolute bottom-0 left-0">
-                    <button>Add to Cart</button>
+                    <button onClick={()=> handleCart(item._id)}>Add to Cart</button>
                   </div>
                 </div>
               );
