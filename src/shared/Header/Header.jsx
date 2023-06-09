@@ -31,10 +31,7 @@ const Header = () => {
           </div>
           <div className="space-x-12 font-inter">
             {user ? (
-              <div
-                className="flex items-center gap-2 cursor-pointer relative"
-                onClick={() => setActive(!isActive)}
-              >
+              <div className="flex items-center gap-2 cursor-pointer relative">
                 <Link
                   to="/dashboard/cart"
                   className=" text-2xl gap-0 me-4 relative"
@@ -44,22 +41,27 @@ const Header = () => {
                     {(cart && cart?.length) || 0}
                   </small>
                 </Link>
-                {user ? (
-                  <img
-                    className="w-7 h-6 rounded-full"
-                    src={user?.photoURL}
-                    alt=""
-                  />
-                ) : (
-                  ""
-                )}
-                {user?.displayName}
+                <div
+                  className="flex gap-2 items-center"
+                  onClick={() => setActive(!isActive)}
+                >
+                  {user ? (
+                    <img
+                      className="w-7 h-6 rounded-full"
+                      src={user?.photoURL}
+                      alt=""
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {user?.displayName}
 
-                {isActive ? (
-                  <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
-                ) : (
-                  <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
-                )}
+                  {isActive ? (
+                    <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+                  ) : (
+                    <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
+                  )}
+                </div>
                 {isActive && (
                   <div className="absolute -bottom-32 right-0 border p-1 shadow-md rounded-md px-2 opacity-100 bg-[#FFFFFF]">
                     <div>

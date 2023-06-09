@@ -110,14 +110,17 @@ const SignIn = () => {
               </small>
             </div>
             {loading ? (
-              <div className="bg-black text-white text-3xl rounded-md">
-                <CgSpinnerTwo className="p-1 animate-spin mx-auto"></CgSpinnerTwo>
+              <div className="bg-black text-white text-3xl rounded-md py-2">
+                <CgSpinnerTwo
+                  className="animate-spin mx-auto"
+                  size={28}
+                ></CgSpinnerTwo>
               </div>
             ) : (
               <input
                 type="submit"
                 value="Sign In"
-                className="bg-black text-white py-1 rounded-md cursor-pointer"
+                className="bg-black text-white py-2 rounded-md cursor-pointer text-xl font-semibold"
               />
             )}
           </form>

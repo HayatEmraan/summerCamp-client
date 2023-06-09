@@ -189,15 +189,15 @@ const SignUp = () => {
             )}
             <input type="file" {...register("image", { required: true })} />
             {loading ? (
-              <div className="bg-black text-white text-3xl rounded-md">
-                <CgSpinnerTwo className="p-1 animate-spin mx-auto"></CgSpinnerTwo>
+              <div className="bg-black text-white text-3xl py-2 rounded-md">
+                <CgSpinnerTwo size={28} className="animate-spin mx-auto"></CgSpinnerTwo>
               </div>
             ) : (
               <input
                 type="submit"
                 disabled={disableBtn}
                 value="Sign Up"
-                className={`text-white py-1 rounded-md ${
+                className={`text-white py-2 text-xl font-semibold rounded-md ${
                   disableBtn
                     ? "cursor-not-allowed bg-gray-600"
                     : "cursor-pointer bg-black"

@@ -20,7 +20,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -57,6 +57,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        setUser(currentUser);
         fetch("http://localhost:3000/jwt", {
           method: "POST",
           headers: {
@@ -67,10 +68,12 @@ const AuthProvider = ({ children }) => {
           .then((res) => res.json())
           .then((data) => {
             Cookies.set("access_token", data.token, { expires: 7, path: "/" });
-            setUser(currentUser);
-            console.log("current user", currentUser);
             setLoading(false);
           });
+      } else {
+        setUser(null);
+        Cookies.remove("access_token");
+        setLoading(false);
       }
     });
     return () => {
