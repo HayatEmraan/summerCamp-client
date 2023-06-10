@@ -82,7 +82,11 @@ const Header = () => {
                     )}
                   </div>
                   {isActive && (
-                    <div className="absolute lg:-bottom-32 top-20 lg:right-0 border p-1 shadow-md rounded-md px-2 opacity-100 bg-[#FFFFFF]">
+                    <div
+                      className={`absolute lg:-bottom-32 ${
+                        isHidden && "top-20"
+                      } lg:right-0 border p-1 shadow-md rounded-md px-2 opacity-100 bg-[#FFFFFF]`}
+                    >
                       <div>
                         <div className="mt-2 hover:bg-[#FFE699]">
                           <Link

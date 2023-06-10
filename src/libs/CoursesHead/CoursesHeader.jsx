@@ -10,6 +10,7 @@ const CoursesHeader = () => {
     setSelectCategory(e.target.value);
   };
   const [sort, setSort] = useState(false);
+  const [trending, setTrending] = useState(false);
   return (
     <div className="mx-auto container my-12">
       <div className="flex justify-between items-center">
@@ -35,10 +36,17 @@ const CoursesHeader = () => {
               <MdOutlineKeyboardArrowDown className="-mt-[6px]"></MdOutlineKeyboardArrowDown>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            <h2>Popularity</h2>
+          <div
+            className="flex items-center gap-1 cursor-pointer"
+            onClick={() => setTrending(!trending)}
+          >
+            <h2>Trending</h2>
             <div>
-              <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+              {trending ? (
+                <MdOutlineKeyboardArrowUp className="text-red-700"></MdOutlineKeyboardArrowUp>
+              ) : (
+                <MdOutlineKeyboardArrowUp></MdOutlineKeyboardArrowUp>
+              )}
               <MdOutlineKeyboardArrowDown className="-mt-[6px]"></MdOutlineKeyboardArrowDown>
             </div>
           </div>
@@ -62,7 +70,7 @@ const CoursesHeader = () => {
         </div>
       </div>
       <div className="my-6">
-        <Courses selectCategory={selectCategory} sort={sort}></Courses>
+        <Courses selectCategory={selectCategory} sort={sort} trending={trending}></Courses>
       </div>
     </div>
   );

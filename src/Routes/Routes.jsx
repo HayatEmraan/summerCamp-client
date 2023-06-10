@@ -14,6 +14,8 @@ import MyCourses from "../pages/My Courses/MyCourses";
 import Reviews from "../pages/Reviews/Reviews";
 import MyCart from "../pages/My Cart/MyCart";
 import MyProfile from "../pages/My Profile/MyProfile";
+import PrivateUser from "./PrivateUser";
+import Checkout from "../pages/Checkout/Checkout";
 
 export const Routes = createBrowserRouter([
   {
@@ -42,28 +44,60 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashBoard />,
+        element: (
+          <PrivateUser>
+            <DashBoard></DashBoard>
+          </PrivateUser>
+        ),
         children: [
           {
             path: "/dashboard",
-            element: <MyCourses />,
+            element: (
+              <PrivateUser>
+                <MyCourses />
+              </PrivateUser>
+            ),
           },
           {
             path: "/dashboard/payment",
-            element: <Payment />,
+            element: (
+              <PrivateUser>
+                <Payment />
+              </PrivateUser>
+            ),
           },
           {
             path: "/dashboard/reviews",
-            element: <Reviews />,
+            element: (
+              <PrivateUser>
+                <Reviews />
+              </PrivateUser>
+            ),
           },
           {
             path: "/dashboard/cart",
-            element: <MyCart />,
+            element: (
+              <PrivateUser>
+                <MyCart />
+              </PrivateUser>
+            ),
+          },
+          {
+            path: "/dashboard/checkout",
+            element: (
+              <PrivateUser>
+                <Checkout />
+              </PrivateUser>
+            ),
           },
           {
             path: "/dashboard/profile",
-            element: <MyProfile />,
-          }
+            element: (
+              <PrivateUser>
+                <MyProfile />
+              </PrivateUser>
+            ),
+          },
         ],
       },
     ],

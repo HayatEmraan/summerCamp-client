@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/fb.config";
+import Loader from "../libs/Loader/Loader";
 
 export const AuthContext = createContext(null);
 
@@ -92,6 +93,9 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
   };
 
+  if (loading) {
+    return <Loader></Loader>;
+  }
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

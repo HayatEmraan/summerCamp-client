@@ -11,11 +11,13 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
 import "./slide.css";
+import DomLoader from "../Loader/DomLoader";
 
 const TabsData = () => {
   const [data, setData] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("category");
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("http://localhost:3000/main")
       .then((res) => res.json())
@@ -23,6 +25,7 @@ const TabsData = () => {
         searchQuery && searchQuery !== "All"
           ? setData(data.filter((fl) => searchQuery === fl.category))
           : setData(data);
+        setLoading(false);
       });
   }, [searchQuery]);
 
@@ -41,50 +44,61 @@ const TabsData = () => {
         <Link to="/courses" className="btn btn-outline mb-4">
           Explore Courses
         </Link>
-        <div>
-          {data && data.length > 0 ? (
-            <Swiper
-              navigation={true}
-              modules={[Navigation]}
-              breakpoints={{
-                640: {
-                  width: 640,
-                  slidesPerView: 2,
-                  spaceBetween: 5,
-                },
-                768: {
-                  width: 768,
-                  slidesPerView: 3,
-                  spaceBetween: 5,
-                },
-              }}
-            >
-              {data.map((item, index) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <div>
-                      <img
-                        style={{ height: "187px", width: "272px" }}
-                        src={item.thumbnailImage}
-                        alt=""
-                      />
-                      <h2 className="font-semibold">{item.title}</h2>
-                      <small>{item.teacherName}</small>
-                      <div className="flex gap-1">
-                        <small className="text-[#662e94] font-bold">4.6</small>
-                        <Rating style={{ maxWidth: 80 }} value={4.6} readOnly />
-                        <small className="text-slate-500">(100,100)</small>
+        {loading ? (
+          <DomLoader></DomLoader>
+        ) : (
+          <div>
+            {data && data.length > 0 ? (
+              <Swiper
+                navigation={true}
+                modules={[Navigation]}
+                breakpoints={{
+                  640: {
+                    width: 640,
+                    slidesPerView: 2,
+                    spaceBetween: 5,
+                  },
+                  768: {
+                    width: 768,
+                    slidesPerView: 3,
+                    spaceBetween: 5,
+                  },
+                }}
+              >
+                {data.map((item, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <div>
+                        <img
+                          className="rounded-lg"
+                          style={{ height: "187px", width: "272px" }}
+                          src={item.thumbnailImage}
+                          alt=""
+                        />
+                        <h2 className="font-semibold">{item.title}</h2>
+                        <small>{item.teacherName}</small>
+                        <div className="flex gap-1">
+                          <small className="text-[#662e94] font-bold">
+                            4.6
+                          </small>
+                          <Rating
+                            style={{ maxWidth: 80 }}
+                            value={4.6}
+                            readOnly
+                          />
+                          <small className="text-slate-500">(100,100)</small>
+                        </div>
+                        <h2>${item.price}</h2>
                       </div>
-                      <h2>${item.price}</h2>
-                    </div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          ) : (
-            <NoResults></NoResults>
-          )}
-        </div>
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
+            ) : (
+              <NoResults></NoResults>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
