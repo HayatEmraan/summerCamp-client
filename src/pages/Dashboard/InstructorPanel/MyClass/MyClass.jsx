@@ -12,7 +12,11 @@ const MyClass = () => {
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(data);
+  const [feedbackData, setFeedbackData] = useState(null);
+  const handleFeedback = (feedback) => {
+    setFeedbackData(feedback);
+    window.my_modal_2.showModal();
+  };
   return (
     <div>
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-16">
@@ -43,25 +47,52 @@ const MyClass = () => {
                     <td>${dt.price}</td>
                     <td>
                       {dt.status === "pending" ? (
-                        <button className="bg-purple-500 text-white px-4 py-2 rounded-md">
+                        <button
+                          className="bg-purple-500 text-white px-4 py-2 rounded-md"
+                          disabled
+                        >
                           {dt.status}
                         </button>
                       ) : (
-                        <button className="bg-indigo-500 text-white px-4 py-2 rounded-md">
+                        <button
+                          className={`${
+                            dt.status === "deny"
+                              ? "bg-red-500 text-white px-4 py-2 rounded-md w-16"
+                              : "bg-indigo-500 text-white px-4 py-2 rounded-md w-16"
+                          }`}
+                          disabled
+                        >
                           {dt.status}
                         </button>
                       )}
                     </td>
                     <td>
-                      <button className="bg-slate-400 text-white px-4 py-2 rounded-md">
-                        view details
-                      </button>
+                      {dt.feedback && (
+                        <button
+                          onClick={() => handleFeedback(dt.feedback)}
+                          className="bg-slate-400 text-white px-4 py-2 rounded-md"
+                        >
+                          view details
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );
               })}
           </tbody>
         </table>
+        <dialog id="my_modal_2" className="modal">
+          <form method="dialog" className="modal-box">
+            <h3 className="font-semibold text-lg text-center font-cinzel">
+              feedback from team!
+            </h3>
+            <hr />
+            <p className="py-4">-------- {feedbackData}</p>
+          </form>
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </div>
     </div>
   );
