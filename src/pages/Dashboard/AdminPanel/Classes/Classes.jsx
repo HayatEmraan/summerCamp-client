@@ -4,13 +4,87 @@ import Swal from "sweetalert2";
 
 const Classes = () => {
   const axiosSecure = useAxiosSecure();
-  const [users, setUsers] = useState(null);
+  const [classes, setClasses] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axiosSecure
-      .get("/users/data")
-      .then((res) => setUsers(res.data))
+      .get("/courses/list")
+      .then((res) => setClasses(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [loading]);
+
+  const handleApprove = (id, status) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to approve this class!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+
+      confirmButtonText: "Yes, approve it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/courses/update/${id}`, { status })
+          .then((res) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Class has been approved!",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+            setLoading(!loading);
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
+  const handleDeny = (id, status) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to deny this class!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+
+      confirmButtonText: "Yes, deny it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/courses/update/${id}`, { status })
+          .then((res) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Class has been denied!",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+            setLoading(!loading);
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
+  const handleFeedback = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to send feedback to this class!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+
+      confirmButtonText: "Yes, send it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Sent!", "Feedback has been sent.", "success");
+      }
+    });
+  };
   return (
     <div>
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
@@ -28,39 +102,56 @@ const Classes = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
-              users.map((user, index) => {
+            {classes &&
+              classes.reverse().map((classData, index) => {
                 return (
-                  <tr className="text-center" key={index}>
+                  <tr key={index}>
                     <th>{index + 1}</th>
-                    <td>{user.name}</td>
-                    <td>{user.role}</td>
-                    <td>{user.email}</td>
+                    <td>{classData.courseName}</td>
+                    <td>{classData.teacherName}</td>
+                    <td>{classData.email}</td>
                     <td>
                       <div className="flex gap-2 justify-center">
                         <button
-                          onClick={() => handleUpdate(user._id, "admin")}
-                          disabled={user?.role === "admin" ? true : false}
+                          onClick={() =>
+                            handleApprove(classData._id, "success")
+                          }
+                          disabled={
+                            classData?.status === "success" || "deny"
+                              ? true
+                              : false
+                          }
                           className={`${
-                            user?.role === "admin"
-                              ? "bg-slate-400 text-white px-4 py-2 rounded-md invisible"
+                            classData?.status === "success" || "deny"
+                              ? "bg-slate-400 text-white px-4 py-2 rounded-md"
                               : "bg-green-500 text-white px-4 py-2 rounded-md"
                           }`}
                         >
-                          APPROVE
+                          {classData?.status === "success"
+                            ? "APPROVED"
+                            : "APPROVE"}
                         </button>
                         <button
-                          onClick={() => handleUpdate(user._id, "instructor")}
-                          disabled={user?.role === "instructor" ? true : false}
+                          onClick={() => handleDeny(classData._id, "deny")}
+                          disabled={
+                            classData?.status === "success" ? true : false
+                          }
                           className={`${
-                            user?.role === "instructor"
-                              ? "bg-slate-400 text-white px-4 py-2 rounded-md invisible"
+                            classData?.status === "success"
+                              ? "bg-slate-400 text-white px-4 py-2 rounded-md"
                               : "bg-purple-500 text-white px-4 py-2 rounded-md"
                           }`}
                         >
-                          DENY
+                          {classData?.status === "deny" ? "DENIED" : "DENY"}
                         </button>
-                        <button className="bg-slate-500 text-white px-4 py-2 rounded-md">
+                        <button
+                          onClick={() => handleFeedback(classData._id)}
+                          className={`${
+                            classData.status === "deny"
+                              ? "bg-green-500 text-white px-4 py-2 rounded-md"
+                              : "bg-slate-500 text-white px-4 py-2 rounded-md"
+                          }`}
+                        >
                           SEND FEEDBACK
                         </button>
                       </div>

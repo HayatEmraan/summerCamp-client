@@ -61,7 +61,7 @@ const CoursesList = () => {
               <div className="overflow-x-auto border border-separate rounded-lg">
                 <table className="table table-xs">
                   <thead className="bg-[#667085] text-[17px] text-white">
-                    <tr className="text-start">
+                    <tr>
                       <th>#</th>
                       <th>Name</th>
                       <th>Instructor</th>
@@ -75,15 +75,15 @@ const CoursesList = () => {
                     {coursesData &&
                       coursesData.map((course, index) => {
                         return (
-                          <tr className="text-center" key={index}>
+                          <tr key={index}>
                             <th>{index + 1}</th>
                             <td>{course.courseName}</td>
                             <td>{course.teacherName}</td>
                             <td>{course.availableSits}</td>
                             <td>${course.price}</td>
                             <td>
-                              <div className="flex gap-2 justify-center">
-                                <p className="bg-green-500 text-white px-4 py-2 rounded-md">
+                              <div className="flex gap-2">
+                                <p className="bg-green-500 text-white px-4 py-2 rounded-md w-20 text-center">
                                   {course.category}
                                 </p>
                               </div>
