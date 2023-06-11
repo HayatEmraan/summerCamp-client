@@ -87,7 +87,7 @@ const Courses = ({ selectCategory, sort, trending }) => {
                       src={item.thumbnailImage}
                       alt=""
                     />
-                    <h2 className="font-semibold">{item.title}</h2>
+                    <h2 className="font-semibold">{item.courseName}</h2>
                     <small>{item.teacherName}</small>
                     <div className="flex gap-1">
                       <small className="text-[#662e94] font-bold">4.6</small>

@@ -26,7 +26,7 @@ const Trending = () => {
                     src={course.thumbnailImage}
                     alt=""
                   />
-                  <h2 className="font-semibold">{course.title}</h2>
+                  <h2 className="font-semibold">{course.courseName}</h2>
                   <small>{course.teacherName}</small>
                   <div className="flex gap-1">
                     <small className="text-[#662e94] font-bold">4.6</small>
@@ -35,7 +35,9 @@ const Trending = () => {
                   </div>
                   <div className="flex justify-between">
                     <h2>${course.price}</h2>
-                    <h2 className="me-4">Available Seats: {course.availableSits}</h2>
+                    <h2 className="me-4">
+                      Available Seats: {course.availableSits}
+                    </h2>
                   </div>
                 </div>
               );

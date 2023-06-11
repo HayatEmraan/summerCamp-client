@@ -2,15 +2,22 @@ import React, { useContext } from "react";
 import logo from "../../assets/logo/logo-transparent.png";
 import { AuthContext } from "../../context/AuthContext";
 import { FaDiscourse } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { MdFlightClass, MdOutlineDashboardCustomize, MdPayment, MdReviews } from "react-icons/md";
+import { AiOutlineAppstoreAdd, AiOutlineShoppingCart } from "react-icons/ai";
+import {
+  MdFlightClass,
+  MdOutlineClass,
+  MdOutlineDashboardCustomize,
+  MdPayment,
+  MdReviews,
+} from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import { BiUserVoice } from "react-icons/bi";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  const isAdmin = true;
+  const isAdmin = false;
+  const instructor = true;
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-7">
@@ -33,76 +40,107 @@ const DashBoard = () => {
           <hr />
           <div className="p-8">
             <ul className="space-y-4">
-              {isAdmin && isAdmin ? (
-                <>
-                  <NavLink
-                    to="/dashboard/admin"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active flex items-center gap-4"
-                        : "pending flex items-center gap-4"
-                    }
-                  >
-                    <MdOutlineDashboardCustomize
-                      size={28}
-                    ></MdOutlineDashboardCustomize>
-                    <span className="text-2xl">Dashboard</span>
-                  </NavLink>
-                  <NavLink
-                    to="/dashboard/orders"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active flex items-center gap-4"
-                        : "pending flex items-center gap-4"
-                    }
-                  >
-                    <AiOutlineShoppingCart size={28}></AiOutlineShoppingCart>
-                    <span className="text-2xl">All Orders</span>
-                  </NavLink>
-                  <NavLink
-                    to="/dashboard/users"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active flex items-center gap-4"
-                        : "pending flex items-center gap-4"
-                    }
-                  >
-                    <BiUserVoice size={28}></BiUserVoice>
-                    <span className="text-2xl">All Users</span>
-                  </NavLink>
-                  <NavLink
-                    to="/dashboard/classes"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active flex items-center gap-4"
-                        : "pending flex items-center gap-4"
-                    }
-                  >
-                    <MdFlightClass size={28}></MdFlightClass>
-                    <span className="text-2xl">Manage Classes</span>
-                  </NavLink>
-                  <NavLink
-                    to="/dashboard/courses/list"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "active flex items-center gap-4"
-                        : "pending flex items-center gap-4"
-                    }
-                  >
-                    <MdReviews size={28}></MdReviews>
-                    <span className="text-2xl">All Courses</span>
-                  </NavLink>
-                </>
+              {isAdmin || instructor ? (
+                isAdmin ? (
+                  <>
+                    <NavLink
+                      to="/dashboard/admin"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <MdOutlineDashboardCustomize
+                        size={28}
+                      ></MdOutlineDashboardCustomize>
+                      <span className="text-2xl">Dashboard</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/orders"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <AiOutlineShoppingCart size={28}></AiOutlineShoppingCart>
+                      <span className="text-2xl">All Orders</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/users"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <BiUserVoice size={28}></BiUserVoice>
+                      <span className="text-2xl">All Users</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/classes"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <MdFlightClass size={28}></MdFlightClass>
+                      <span className="text-2xl">Manage Classes</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/courses/list"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <MdReviews size={28}></MdReviews>
+                      <span className="text-2xl">All Courses</span>
+                    </NavLink>
+                  </>
+                ) : (
+                  <>
+                    <NavLink
+                      to="/dashboard/addaclass"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <AiOutlineAppstoreAdd size={28}></AiOutlineAppstoreAdd>
+                      <span className="text-2xl">Add A Class</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/myclass"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "active flex items-center gap-4"
+                          : "pending flex items-center gap-4"
+                      }
+                    >
+                      <MdOutlineClass size={28}></MdOutlineClass>
+                      <span className="text-2xl">My Classes</span>
+                    </NavLink>
+                  </>
+                )
               ) : (
                 <>
                   <NavLink
@@ -159,7 +197,6 @@ const DashBoard = () => {
                   </NavLink>
                 </>
               )}
-              ;
             </ul>
           </div>
           <Link

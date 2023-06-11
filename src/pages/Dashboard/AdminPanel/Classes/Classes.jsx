@@ -13,7 +13,9 @@ const Classes = () => {
   }, []);
   return (
     <div>
-      <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">Manage Classes</h2>
+      <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
+        Manage Classes
+      </h2>
       <div className="overflow-x-auto">
         <table className="table table-xs">
           <thead>
@@ -56,18 +58,10 @@ const Classes = () => {
                               : "bg-purple-500 text-white px-4 py-2 rounded-md"
                           }`}
                         >
-                        DENY
+                          DENY
                         </button>
-                        <button
-                          onClick={() => handleUpdate(user._id, "user")}
-                          disabled={user?.role === "user" ? true : false}
-                          className={`${
-                            user?.role === "user"
-                              ? "bg-slate-400 text-white px-4 py-2 rounded-md invisible"
-                              : "bg-indigo-500 text-white px-4 py-2 rounded-md"
-                          }`}
-                        >
-                          User
+                        <button className="bg-slate-500 text-white px-4 py-2 rounded-md">
+                          SEND FEEDBACK
                         </button>
                       </div>
                     </td>

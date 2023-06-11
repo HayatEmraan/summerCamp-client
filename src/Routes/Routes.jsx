@@ -21,6 +21,8 @@ import Users from "../pages/Dashboard/AdminPanel/Users/Users";
 import Orders from "../pages/Dashboard/AdminPanel/Orders/Orders";
 import ClassesList from "../pages/Dashboard/AdminPanel/Classes/Classes";
 import CoursesList from "../pages/Dashboard/AdminPanel/CoursesList/CoursesList";
+import AddAClass from "../pages/Dashboard/InstructorPanel/AddAClass/AddAClass";
+import MyClass from "../pages/Dashboard/InstructorPanel/MyClass/MyClass";
 
 export const Routes = createBrowserRouter([
   {
@@ -122,6 +124,14 @@ export const Routes = createBrowserRouter([
           {
             path: "/dashboard/courses/list",
             element: <CoursesList />,
+          },
+          {
+            path: "/dashboard/addaclass",
+            element: <AddAClass />,
+          },
+          {
+            path: "/dashboard/myclass",
+            element: <MyClass />,
           },
         ],
       },
