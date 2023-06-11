@@ -1,0 +1,17 @@
+.pending:hover{
+    background-color: #EAECF0;
+}
+.pending{
+    border-radius: 5px;
+    padding: 10px;
+}
+.active{
+    color: #4caf50;
+    background-color: #fff6d9;
+    border-left: 4px solid #ffc000;
+    border-radius: 5px;
+    padding: 10px;
+}
+.active:hover{
+    background-color: #EAECF0;
+}

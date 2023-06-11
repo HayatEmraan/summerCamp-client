@@ -3,12 +3,14 @@ import logo from "../../assets/logo/logo-transparent.png";
 import { AuthContext } from "../../context/AuthContext";
 import { FaDiscourse } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { MdPayment, MdReviews } from "react-icons/md";
-import MyCourses from "../My Courses/MyCourses";
+import { MdFlightClass, MdOutlineDashboardCustomize, MdPayment, MdReviews } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import "./Dashboard.css";
+import { BiUserVoice } from "react-icons/bi";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
+  const isAdmin = true;
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-7">
@@ -31,22 +33,133 @@ const DashBoard = () => {
           <hr />
           <div className="p-8">
             <ul className="space-y-4">
-              <Link to="/dashboard" className="flex items-center gap-4">
-                <FaDiscourse size={28}></FaDiscourse>
-                <span className="text-2xl">My Courses</span>
-              </Link>
-              <Link to="/dashboard/cart" className="flex items-center gap-4">
-                <AiOutlineShoppingCart size={28}></AiOutlineShoppingCart>
-                <span className="text-2xl">My Cart</span>
-              </Link>
-              <Link to="/dashboard/payment" className="flex items-center gap-4">
-                <MdPayment size={28}></MdPayment>
-                <span className="text-2xl">Payment History</span>
-              </Link>
-              <Link to="/dashboard/reviews" className="flex items-center gap-4">
-                <MdReviews size={28}></MdReviews>
-                <span className="text-2xl">Reviews</span>
-              </Link>
+              {isAdmin && isAdmin ? (
+                <>
+                  <NavLink
+                    to="/dashboard/admin"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <MdOutlineDashboardCustomize
+                      size={28}
+                    ></MdOutlineDashboardCustomize>
+                    <span className="text-2xl">Dashboard</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/orders"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <AiOutlineShoppingCart size={28}></AiOutlineShoppingCart>
+                    <span className="text-2xl">All Orders</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/users"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <BiUserVoice size={28}></BiUserVoice>
+                    <span className="text-2xl">All Users</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/classes"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <MdFlightClass size={28}></MdFlightClass>
+                    <span className="text-2xl">Manage Classes</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/courses/list"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <MdReviews size={28}></MdReviews>
+                    <span className="text-2xl">All Courses</span>
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to="/dashboard/courses"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <FaDiscourse size={28}></FaDiscourse>
+                    <span className="text-2xl">My Courses</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/cart"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <AiOutlineShoppingCart size={28}></AiOutlineShoppingCart>
+                    <span className="text-2xl">My Cart</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/payment"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <MdPayment size={28}></MdPayment>
+                    <span className="text-2xl">Payment History</span>
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/reviews"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "active flex items-center gap-4"
+                        : "pending flex items-center gap-4"
+                    }
+                  >
+                    <MdReviews size={28}></MdReviews>
+                    <span className="text-2xl">Reviews</span>
+                  </NavLink>
+                </>
+              )}
+              ;
             </ul>
           </div>
           <Link

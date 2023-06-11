@@ -11,6 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
+import { useGoogle } from "../Hooks/useGoogle";
 
 const SignUp = () => {
   const location = useLocation();
@@ -57,6 +58,15 @@ const SignUp = () => {
         createUser(data.email, data.password)
           .then((res) => {
             updateUserProfile(data.name, dataImg.data.url);
+            const date = new Date().toLocaleDateString();
+            const role = "user";
+            useGoogle(
+              res.user.email,
+              res.user.displayName,
+              date,
+              role,
+              res.user.photoURL
+            );
             reset();
             toast.success("Successfully SignUp!");
             navigate(from, { replace: true });
@@ -74,6 +84,15 @@ const SignUp = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
       .then((res) => {
+        const date = new Date().toLocaleDateString();
+        const role = "user";
+        useGoogle(
+          res.user.email,
+          res.user.displayName,
+          date,
+          role,
+          res.user.photoURL
+        );
         navigate(from, { replace: true });
         toast.success("Authentication Successful!");
       })
@@ -189,7 +208,10 @@ const SignUp = () => {
             <input type="file" {...register("image", { required: true })} />
             {loading ? (
               <div className="bg-black text-white text-3xl py-2 rounded-md">
-                <CgSpinnerTwo size={28} className="animate-spin mx-auto"></CgSpinnerTwo>
+                <CgSpinnerTwo
+                  size={28}
+                  className="animate-spin mx-auto"
+                ></CgSpinnerTwo>
               </div>
             ) : (
               <input

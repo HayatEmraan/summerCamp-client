@@ -7,6 +7,7 @@ import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
+import { useGoogle } from "../Hooks/useGoogle";
 const SignIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -48,6 +49,15 @@ const SignIn = () => {
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
       .then((res) => {
+        const date = new Date().toLocaleDateString();
+        const role = "user";
+        useGoogle(
+          res.user.email,
+          res.user.displayName,
+          date,
+          role,
+          res.user.photoURL
+        );
         navigate(from, { replace: true });
         toast.success("Authentication Successful!");
       })

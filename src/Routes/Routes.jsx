@@ -16,6 +16,11 @@ import MyCart from "../pages/My Cart/MyCart";
 import MyProfile from "../pages/My Profile/MyProfile";
 import PrivateUser from "./PrivateUser";
 import Checkout from "../pages/Checkout/Checkout";
+import DashAdmin from "../pages/Dashboard/AdminPanel/DashAdmin/DashAdmin";
+import Users from "../pages/Dashboard/AdminPanel/Users/Users";
+import Orders from "../pages/Dashboard/AdminPanel/Orders/Orders";
+import ClassesList from "../pages/Dashboard/AdminPanel/Classes/Classes";
+import CoursesList from "../pages/Dashboard/AdminPanel/CoursesList/CoursesList";
 
 export const Routes = createBrowserRouter([
   {
@@ -51,7 +56,7 @@ export const Routes = createBrowserRouter([
         ),
         children: [
           {
-            path: "/dashboard",
+            path: "/dashboard/courses",
             element: (
               <PrivateUser>
                 <MyCourses />
@@ -97,6 +102,26 @@ export const Routes = createBrowserRouter([
                 <MyProfile />
               </PrivateUser>
             ),
+          },
+          {
+            path: "/dashboard/admin",
+            element: <DashAdmin />,
+          },
+          {
+            path: "/dashboard/users",
+            element: <Users />,
+          },
+          {
+            path: "/dashboard/orders",
+            element: <Orders />,
+          },
+          {
+            path: "/dashboard/classes",
+            element: <ClassesList />,
+          },
+          {
+            path: "/dashboard/courses/list",
+            element: <CoursesList />,
           },
         ],
       },
