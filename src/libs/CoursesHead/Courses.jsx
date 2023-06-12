@@ -20,8 +20,8 @@ const Courses = ({ selectCategory, sort, trending }) => {
     fetch(
       `${
         trending
-          ? "http://localhost:3000/courses/trending"
-          : `http://localhost:3000/courses?sort=${sort}`
+          ? "https://summer-camp-sv.vercel.app/courses/trending"
+          : `https://summer-camp-sv.vercel.app/courses?sort=${sort}`
       }`
     )
       .then((res) => res.json())

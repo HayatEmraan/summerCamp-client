@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const InstructorsHeader = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:3000/half")
+    fetch("https://summer-camp-sv.vercel.app/half")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -31,7 +31,8 @@ const InstructorsHeader = () => {
             data.slice(1, 6).map((item, index) => {
               return (
                 <div key={index} className="border p-2 rounded-md">
-                  <img className="rounded-md"
+                  <img
+                    className="rounded-md"
                     style={{ height: "187px", width: "272px" }}
                     src={item.image}
                     alt=""

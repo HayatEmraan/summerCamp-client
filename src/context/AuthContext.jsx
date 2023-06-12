@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        fetch("http://localhost:3000/jwt", {
+        fetch("https://summer-camp-sv.vercel.app/jwt", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

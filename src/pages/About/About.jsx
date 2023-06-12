@@ -4,7 +4,7 @@ const About = () => {
   const { data, error, refetch } = useQuery({
     queryKey: ["team"],
     queryFn: () =>
-      fetch("http://localhost:3000/team")
+      fetch("https://summer-camp-sv.vercel.app/team")
         .then((res) => res.json())
         .then((data) => {
           return data;

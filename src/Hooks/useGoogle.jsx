@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 
 export const useGoogle = (email, name, date, role, photo) => {
   axios
-    .post("http://localhost:3000/users/data", {
+    .post("https://summer-camp-sv.vercel.app/users/data", {
       email,
       name,
       date,

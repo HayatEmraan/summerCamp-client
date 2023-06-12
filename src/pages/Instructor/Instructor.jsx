@@ -6,7 +6,9 @@ const Instructor = () => {
   const nameSplit = name.split("_");
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:3000/instuctor?name=" + nameSplit.join(" "))
+    fetch(
+      "https://summer-camp-sv.vercel.app/instuctor?name=" + nameSplit.join(" ")
+    )
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

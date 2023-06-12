@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
+import DomLoader from "../../../../libs/Loader/DomLoader";
+import NoResults from "../../../../libs/Tabs/NoResults";
 
 const MyClass = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axiosSecure
       .get(`/classes?email=${user?.email}`)
-      .then((res) => setData(res.data))
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+      })
       .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, []);
   const [feedbackData, setFeedbackData] = useState(null);
@@ -23,78 +29,88 @@ const MyClass = () => {
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-16">
         My Classes
       </h2>
-      <div className="overflow-x-auto">
-        <table className="table table-xs">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Rest Seats</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Feedback</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data.map((dt, index) => {
-                return (
-                  <tr key={index}>
-                    <th>{index + 1}</th>
-                    <td>{dt.courseName}</td>
-                    <td>{dt.category}</td>
-                    <td>{dt.availableSits}</td>
-                    <td>${dt.price}</td>
-                    <td>
-                      {dt.status === "pending" ? (
-                        <button
-                          className="bg-purple-500 text-white px-4 py-2 rounded-md"
-                          disabled
-                        >
-                          {dt.status}
-                        </button>
-                      ) : (
-                        <button
-                          className={`${
-                            dt.status === "deny"
-                              ? "bg-red-500 text-white px-4 py-2 rounded-md w-16"
-                              : "bg-indigo-500 text-white px-4 py-2 rounded-md w-16"
-                          }`}
-                          disabled
-                        >
-                          {dt.status}
-                        </button>
-                      )}
-                    </td>
-                    <td>
-                      {dt.feedback && (
-                        <button
-                          onClick={() => handleFeedback(dt.feedback)}
-                          className="bg-slate-400 text-white px-4 py-2 rounded-md"
-                        >
-                          view details
-                        </button>
-                      )}
-                    </td>
+      {loading ? (
+        <DomLoader></DomLoader>
+      ) : (
+        <>
+          {data && data.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="table table-xs">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Rest Seats</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Feedback</th>
                   </tr>
-                );
-              })}
-          </tbody>
-        </table>
-        <dialog id="my_modal_2" className="modal">
-          <form method="dialog" className="modal-box">
-            <h3 className="font-semibold text-lg text-center font-cinzel">
-              feedback from team!
-            </h3>
-            <hr />
-            <p className="py-4">-------- {feedbackData}</p>
-          </form>
-          <form method="dialog" className="modal-backdrop">
-            <button>close</button>
-          </form>
-        </dialog>
-      </div>
+                </thead>
+                <tbody>
+                  {data &&
+                    data.map((dt, index) => {
+                      return (
+                        <tr key={index}>
+                          <th>{index + 1}</th>
+                          <td>{dt.courseName}</td>
+                          <td>{dt.category}</td>
+                          <td>{dt.availableSits}</td>
+                          <td>${dt.price}</td>
+                          <td>
+                            {dt.status === "pending" ? (
+                              <button
+                                className="bg-purple-500 text-white px-4 py-2 rounded-md"
+                                disabled
+                              >
+                                {dt.status}
+                              </button>
+                            ) : (
+                              <button
+                                className={`${
+                                  dt.status === "deny"
+                                    ? "bg-red-500 text-white px-4 py-2 rounded-md w-16"
+                                    : "bg-indigo-500 text-white px-4 py-2 rounded-md w-16"
+                                }`}
+                                disabled
+                              >
+                                {dt.status}
+                              </button>
+                            )}
+                          </td>
+                          <td>
+                            {dt.feedback && (
+                              <button
+                                onClick={() => handleFeedback(dt.feedback)}
+                                className="bg-slate-400 text-white px-4 py-2 rounded-md"
+                              >
+                                view details
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+              <dialog id="my_modal_2" className="modal">
+                <form method="dialog" className="modal-box">
+                  <h3 className="font-semibold text-lg text-center font-cinzel">
+                    feedback from team!
+                  </h3>
+                  <hr />
+                  <p className="py-4">-------- {feedbackData}</p>
+                </form>
+                <form method="dialog" className="modal-backdrop">
+                  <button>close</button>
+                </form>
+              </dialog>
+            </div>
+          ) : (
+            <NoResults></NoResults>
+          )}
+        </>
+      )}
     </div>
   );
 };

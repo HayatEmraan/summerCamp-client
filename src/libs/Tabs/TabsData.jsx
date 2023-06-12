@@ -19,7 +19,7 @@ const TabsData = () => {
   const searchQuery = searchParams.get("category");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:3000/main")
+    fetch("https://summer-camp-sv.vercel.app/main")
       .then((res) => res.json())
       .then((data) => {
         searchQuery && searchQuery !== "All"

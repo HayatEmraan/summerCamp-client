@@ -5,7 +5,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 const Instructors = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:3000/half")
+    fetch("https://summer-camp-sv.vercel.app/half")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

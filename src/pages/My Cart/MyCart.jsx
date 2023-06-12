@@ -36,10 +36,12 @@ const MyCart = () => {
                 <h2>
                   total price: $
                   {cart &&
-                    cart.reduce(
-                      (previous, newTotal) => previous + newTotal.price,
-                      0
-                    )}
+                    cart
+                      .reduce(
+                        (previous, newTotal) => previous + newTotal.price,
+                        0
+                      )
+                      .toFixed(2)}
                 </h2>
                 <Link
                   to="/dashboard/checkout"

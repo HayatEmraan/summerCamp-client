@@ -8,7 +8,7 @@ export const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://summer-camp-sv.vercel.app",
   });
   useEffect(() => {
     axiosInstance.interceptors.request.use((config) => {
