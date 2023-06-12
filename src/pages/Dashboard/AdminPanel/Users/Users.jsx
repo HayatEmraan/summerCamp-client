@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,7 +11,7 @@ const Users = () => {
     axiosSecure
       .get("/users/data")
       .then((res) => setUsers(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, [loading]);
   const handleDelete = (id) => {
     Swal.fire({
@@ -35,7 +36,9 @@ const Users = () => {
             });
             setLoading(!loading);
           })
-          .catch((err) => console.log(err));
+          .catch((err) =>
+            toast.error("Something went wrong. Please try again!")
+          );
       }
     });
   };
@@ -52,7 +55,7 @@ const Users = () => {
         });
         setLoading(!loading);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   };
   return (
     <div>

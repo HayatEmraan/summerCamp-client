@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 const Classes = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,7 +11,7 @@ const Classes = () => {
     axiosSecure
       .get("/courses/list")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, [loading]);
 
   const handleApprove = (id, status) => {
@@ -37,7 +38,9 @@ const Classes = () => {
             });
             setLoading(!loading);
           })
-          .catch((err) => console.log(err));
+          .catch((err) =>
+            toast.error("Something went wrong. Please try again!")
+          );
       }
     });
   };
@@ -65,7 +68,9 @@ const Classes = () => {
             });
             setLoading(!loading);
           })
-          .catch((err) => console.log(err));
+          .catch((err) =>
+            toast.error("Something went wrong. Please try again!")
+          );
       }
     });
   };
@@ -88,10 +93,17 @@ const Classes = () => {
           timer: 1000,
         });
         setLoading(!loading);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Feedback has been sent!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         window.my_modal_2.close();
         e.target.reset();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   };
   return (
     <div>
@@ -125,12 +137,12 @@ const Classes = () => {
                             handleApprove(classData._id, "success")
                           }
                           disabled={
-                            classData?.status === "success" || "deny"
+                            classData?.status !== "pending"
                               ? true
                               : false
                           }
                           className={`${
-                            classData?.status === "success" || "deny"
+                            classData?.status !== "pending"
                               ? "bg-slate-400 text-white px-4 py-2 rounded-md"
                               : "bg-green-500 text-white px-4 py-2 rounded-md"
                           }`}
@@ -142,10 +154,12 @@ const Classes = () => {
                         <button
                           onClick={() => handleDeny(classData._id, "deny")}
                           disabled={
-                            classData?.status === "success" || "deny" ? true : false
+                            classData?.status !== "pending"
+                              ? true
+                              : false
                           }
                           className={`${
-                            classData?.status === "success" || "deny"
+                            classData?.status !== "pending"
                               ? "bg-slate-400 text-white px-4 py-2 rounded-md"
                               : "bg-purple-500 text-white px-4 py-2 rounded-md"
                           }`}

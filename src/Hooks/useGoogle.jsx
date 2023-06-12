@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export const useGoogle = (email, name, date, role, photo) => {
   axios
@@ -10,5 +11,5 @@ export const useGoogle = (email, name, date, role, photo) => {
       photo,
     })
     .then((res) => {})
-    .catch((err) => console.log(err));
+    .catch((err) => toast.error("Something went wrong. Please try again!"));
 };

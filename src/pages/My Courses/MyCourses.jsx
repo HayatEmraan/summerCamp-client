@@ -6,6 +6,7 @@ import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import NoResults from "../../libs/Tabs/NoResults";
 import DomLoader from "../../libs/Loader/DomLoader";
+import { toast } from "react-hot-toast";
 const MyCourses = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const MyCourses = () => {
         setCourses(res.data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, []);
   let listOf = [];
   courses?.map((course) => course.courses?.map((c) => listOf.push(c)));

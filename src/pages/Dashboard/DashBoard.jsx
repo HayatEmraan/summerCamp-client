@@ -16,7 +16,7 @@ import "./Dashboard.css";
 import { BiUserVoice } from "react-icons/bi";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  const isAdmin = false;
+  const isAdmin = true;
   const instructor = true;
   return (
     <div className="container mx-auto">

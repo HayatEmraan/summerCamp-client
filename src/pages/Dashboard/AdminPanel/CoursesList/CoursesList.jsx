@@ -4,6 +4,7 @@ import DomLoader from "../../../../libs/Loader/DomLoader";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 const CoursesList = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,7 @@ const CoursesList = () => {
         setCoursesData(res.data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, [updateLoading]);
   const handleDelete = (id) => {
     Swal.fire({
@@ -43,7 +44,9 @@ const CoursesList = () => {
             });
             setUpdateLoading(!updateLoading);
           })
-          .catch((err) => console.log(err));
+          .catch((err) =>
+            toast.error("Something went wrong. Please try again!")
+          );
       }
     });
   };

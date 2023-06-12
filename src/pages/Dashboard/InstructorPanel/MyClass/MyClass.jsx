@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const MyClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,7 +11,7 @@ const MyClass = () => {
     axiosSecure
       .get(`/classes?email=${user?.email}`)
       .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, []);
   const [feedbackData, setFeedbackData] = useState(null);
   const handleFeedback = (feedback) => {

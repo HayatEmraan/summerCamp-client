@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 const AddAClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -33,8 +35,16 @@ const AddAClass = () => {
             description: data.description,
             thumbnailImage: dataImg.data.display_url,
           })
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
+          .then((res) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Class has been added!",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          })
+          .catch((err) => toast.error("Something went wrong. Please try again!"));
       });
   };
   return (

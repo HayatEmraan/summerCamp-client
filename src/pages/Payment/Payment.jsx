@@ -3,6 +3,7 @@ import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import NoResults from "../../libs/Tabs/NoResults";
 import DomLoader from "../../libs/Loader/DomLoader";
+import { toast } from "react-hot-toast";
 
 const Payment = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,7 +17,7 @@ const Payment = () => {
         setPaymentHistory(res.data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Something went wrong. Please try again!"));
   }, []);
   return (
     <div>
