@@ -4,6 +4,7 @@ import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddAClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -52,6 +53,9 @@ const AddAClass = () => {
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
+        <Helmet>
+          <title>Add A Class | E-Learning</title>
+        </Helmet>
         <h2 className="text-3xl font-cinzel text-center mt-8 mb-16">
           Add A Class
         </h2>

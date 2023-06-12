@@ -5,10 +5,10 @@ import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const CoursesList = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
   const [coursesData, setCoursesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -56,6 +56,9 @@ const CoursesList = () => {
         <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
           All Courses
         </h2>
+        <Helmet>
+          <title>Courses | E-Learning</title>
+        </Helmet>
         {loading ? (
           <DomLoader></DomLoader>
         ) : (

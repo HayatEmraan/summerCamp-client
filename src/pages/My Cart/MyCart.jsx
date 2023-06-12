@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import cartImg from "../../assets/cart/empty-cart.png";
 import DomLoader from "../../libs/Loader/DomLoader";
+import { Helmet } from "react-helmet-async";
 const MyCart = () => {
   const { cart, refetch, isLoading } = useCart();
   const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ const MyCart = () => {
   return (
     <div>
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">My Cart</h2>
+      <Helmet>
+        <title>My Cart | E-Learning</title>
+      </Helmet>
       {isLoading ? (
         <DomLoader></DomLoader>
       ) : (

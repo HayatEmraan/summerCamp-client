@@ -3,6 +3,7 @@ import { useAxiosSecure } from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { toast } from "react-hot-toast";
 import DomLoader from "../../../../libs/Loader/DomLoader";
+import { Helmet } from "react-helmet-async";
 
 const Classes = () => {
   const axiosSecure = useAxiosSecure();
@@ -115,6 +116,9 @@ const Classes = () => {
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
         Manage Classes
       </h2>
+      <Helmet>
+        <title>Classes | E-Learning</title>
+      </Helmet>
       {updateLoading ? (
         <DomLoader></DomLoader>
       ) : (

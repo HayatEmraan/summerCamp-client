@@ -16,6 +16,7 @@ import "./Dashboard.css";
 import { BiUserVoice } from "react-icons/bi";
 import { useAdmin } from "../../Hooks/useAdmin";
 import { useInstructor } from "../../Hooks/useInstructor";
+import { Helmet } from "react-helmet-async";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
   const { isAdmin, isLoading } = useAdmin();
@@ -23,6 +24,9 @@ const DashBoard = () => {
     useInstructor();
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>Dashboard | E-Learning</title>
+      </Helmet>
       {!isLoading && !instructorLoading && (
         <div className="grid grid-cols-7">
           <aside className="h-[100vh] bg-[#FFFFFF] shadow-lg font-cinzel col-span-2 relative">

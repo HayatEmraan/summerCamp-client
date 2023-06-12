@@ -1,17 +1,17 @@
 import React from "react";
 import NotFound from "../../assets/Not404/404.gif";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const Not404 = () => {
   return (
     <div>
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <Helmet>
+          <title>404 | E-Learning</title>
+        </Helmet>
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            <img
-              className="w-3/4 mx-auto"
-              src={NotFound}
-              alt=""
-            />
+            <img className="w-3/4 mx-auto" src={NotFound} alt="" />
           </h1>
           <p className="text-base leading-7 text-gray-600">
             Sorry, we couldn’t find the page you’re looking for.

@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { BsArrowRightShort } from "react-icons/bs";
 import password from "../../assets/password/my-password.svg";
+import { Helmet } from "react-helmet-async";
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
   const {
@@ -17,6 +18,9 @@ const MyProfile = () => {
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
         Personal Details
       </h2>
+      <Helmet>
+        <title>My Profile | E-Learning</title>
+      </Helmet>
       <div className="flex gap-4">
         <form
           onSubmit={handleSubmit(onSubmit)}

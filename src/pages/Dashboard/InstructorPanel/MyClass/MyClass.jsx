@@ -4,6 +4,7 @@ import useAuth from "../../../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
 import DomLoader from "../../../../libs/Loader/DomLoader";
 import NoResults from "../../../../libs/Tabs/NoResults";
+import { Helmet } from "react-helmet-async";
 
 const MyClass = () => {
   const axiosSecure = useAxiosSecure();
@@ -29,6 +30,9 @@ const MyClass = () => {
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-16">
         My Classes
       </h2>
+      <Helmet>
+        <title>My Class | E-Learning</title>
+      </Helmet>
       {loading ? (
         <DomLoader></DomLoader>
       ) : (

@@ -5,10 +5,14 @@ import Reviews from "../../libs/Reviews/Reviews";
 import TrustedBy from "../../libs/Trusted/TrustedBy";
 import InstructorsHeader from "../../libs/Instructors/Instructors";
 import Trending from "../../libs/Trending/Trending";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>Home | E-Learning</title>
+      </Helmet>
       <Banner></Banner>
       <Tabs></Tabs>
       <Trending></Trending>

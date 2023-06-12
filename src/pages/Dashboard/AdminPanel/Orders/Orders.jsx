@@ -4,6 +4,7 @@ import DomLoader from '../../../../libs/Loader/DomLoader';
 import { useAxiosSecure } from '../../../../Hooks/useAxiosSecure';
 import useAuth from '../../../../Hooks/useAuth';
 import { toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Orders = () => {
     const axiosSecure = useAxiosSecure();
@@ -25,6 +26,9 @@ const Orders = () => {
           <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
             All orders
           </h2>
+          <Helmet>
+            <title>Orders | E-Learning</title>
+          </Helmet>
           {loading ? (
             <DomLoader></DomLoader>
           ) : (

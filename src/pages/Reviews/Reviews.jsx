@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { BsArrowRightShort } from "react-icons/bs";
 
@@ -13,6 +14,9 @@ const Reviews = () => {
   return (
     <div>
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">Reviews</h2>
+      <Helmet>
+        <title>Reviews | E-Learning</title>
+      </Helmet>
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}

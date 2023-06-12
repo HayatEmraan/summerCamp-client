@@ -1,5 +1,6 @@
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const Instructors = () => {
@@ -31,6 +32,9 @@ const Instructors = () => {
   };
   return (
     <div className="container mx-auto mb-12 mt-4 border p-12 rounded-lg">
+      <Helmet>
+        <title>Instructors | E-Learning</title>
+      </Helmet>
       <h2 className="text-6xl text-center mb-24 text-[#D0ABFF]">
         Meet Our Instructors_
       </h2>

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 const About = () => {
   const { data, error, refetch } = useQuery({
     queryKey: ["team"],
@@ -16,6 +17,9 @@ const About = () => {
       <h2 className="text-6xl text-center mb-24 text-[#D0ABFF]">
         Meet Our Team_
       </h2>
+      <Helmet>
+        <title>Career | E-Learning</title>
+      </Helmet>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 container mx-auto gap-8 text-white justify-items-center text-center">
         {data &&
           data.map((item) => {

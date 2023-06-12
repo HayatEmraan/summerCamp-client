@@ -3,6 +3,7 @@ import { useCart } from "../../Hooks/useCart";
 import StripePayment from "../../libs/StripePayment/StripePayment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { Helmet } from "react-helmet-async";
 
 const Checkout = () => {
   const { cart } = useCart();
@@ -11,6 +12,9 @@ const Checkout = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
   return (
     <div>
+      <Helmet>
+        <title>Checkout | E-Learning</title>
+      </Helmet>
       <Elements stripe={stripePromise}>
         <StripePayment price={price} cart={cart}></StripePayment>
       </Elements>

@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import NoResults from "../../libs/Tabs/NoResults";
 import DomLoader from "../../libs/Loader/DomLoader";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Payment = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,6 +25,9 @@ const Payment = () => {
       <h2 className="text-3xl font-cinzel text-center mt-8 mb-20">
         Payment History
       </h2>
+      <Helmet>
+        <title>Payment | E-Learning</title>
+      </Helmet>
       {loading ? (
         <DomLoader></DomLoader>
       ) : (

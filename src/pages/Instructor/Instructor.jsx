@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 const Instructor = () => {
@@ -14,6 +15,9 @@ const Instructor = () => {
   }, []);
   return (
     <div className="container mx-auto my-6">
+      <Helmet>
+        <title>Instructor | E-Learning</title>
+      </Helmet>
       <div className="grid lg:grid-cols-7 mx-5">
         <div className="col-span-2 border p-4 rounded-md shadow-xl h-fit">
           {data &&
