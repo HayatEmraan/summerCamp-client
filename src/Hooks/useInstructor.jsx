@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import { useAxiosSecure } from "./useAxiosSecure";
 
@@ -8,7 +9,9 @@ export const useInstructor = () => {
     queryKey: ["instructor"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/instructor/verify");
+      const res = await axiosSecure.get(
+        `/api/instructor/verify?email=${user?.email}`
+      );
       return res.data;
     },
   });

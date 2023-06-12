@@ -9,7 +9,9 @@ export const useAdmin = () => {
     queryKey: ["admin"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/admin/verify");
+      const res = await axiosSecure.get(
+        `/api/admin/verify?email=${user?.email}`
+      );
       return res.data;
     },
   });

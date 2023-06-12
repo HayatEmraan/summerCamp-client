@@ -24,6 +24,7 @@ import CoursesList from "../pages/Dashboard/AdminPanel/CoursesList/CoursesList";
 import AddAClass from "../pages/Dashboard/InstructorPanel/AddAClass/AddAClass";
 import MyClass from "../pages/Dashboard/InstructorPanel/MyClass/MyClass";
 import AdminPrivate from "./AdminPrivate";
+import InstructorPrivate from "./InstructorPrivate";
 
 export const Routes = createBrowserRouter([
   {
@@ -148,11 +149,19 @@ export const Routes = createBrowserRouter([
           },
           {
             path: "/dashboard/addaclass",
-            element: <AddAClass />,
+            element: (
+              <InstructorPrivate>
+                <AddAClass />
+              </InstructorPrivate>
+            ),
           },
           {
             path: "/dashboard/myclass",
-            element: <MyClass />,
+            element: (
+              <InstructorPrivate>
+                <MyClass />
+              </InstructorPrivate>
+            ),
           },
         ],
       },

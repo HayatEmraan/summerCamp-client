@@ -14,10 +14,12 @@ import { CgProfile } from "react-icons/cg";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import { BiUserVoice } from "react-icons/bi";
+import { useAdmin } from "../../Hooks/useAdmin";
+import { useInstructor } from "../../Hooks/useInstructor";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  const isAdmin = true;
-  const instructor = true;
+  const { isAdmin, isLoading } = useAdmin();
+  const { isInstructor: instructor } = useInstructor();
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-7">
@@ -40,7 +42,7 @@ const DashBoard = () => {
           <hr />
           <div className="p-8">
             <ul className="space-y-4">
-              {isAdmin || instructor ? (
+              {!isLoading && (isAdmin || instructor) ? (
                 isAdmin ? (
                   <>
                     <NavLink

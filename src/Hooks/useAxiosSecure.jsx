@@ -26,7 +26,7 @@ export const useAxiosSecure = () => {
           (error.response.status === 401 || error.response.status === 403)
         ) {
           await logOut();
-          localStorage.removeItem("token");
+          Cookies.remove("access_token");
           navigate("/signin");
         }
         return Promise.reject(error);
