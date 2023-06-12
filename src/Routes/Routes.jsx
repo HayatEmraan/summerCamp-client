@@ -23,6 +23,7 @@ import ClassesList from "../pages/Dashboard/AdminPanel/Classes/Classes";
 import CoursesList from "../pages/Dashboard/AdminPanel/CoursesList/CoursesList";
 import AddAClass from "../pages/Dashboard/InstructorPanel/AddAClass/AddAClass";
 import MyClass from "../pages/Dashboard/InstructorPanel/MyClass/MyClass";
+import AdminPrivate from "./AdminPrivate";
 
 export const Routes = createBrowserRouter([
   {
@@ -107,23 +108,43 @@ export const Routes = createBrowserRouter([
           },
           {
             path: "/dashboard/admin",
-            element: <DashAdmin />,
+            element: (
+              <AdminPrivate>
+                <DashAdmin />
+              </AdminPrivate>
+            ),
           },
           {
             path: "/dashboard/users",
-            element: <Users />,
+            element: (
+              <AdminPrivate>
+                <Users />
+              </AdminPrivate>
+            ),
           },
           {
             path: "/dashboard/orders",
-            element: <Orders />,
+            element: (
+              <AdminPrivate>
+                <Orders />
+              </AdminPrivate>
+            ),
           },
           {
             path: "/dashboard/classes",
-            element: <ClassesList />,
+            element: (
+              <AdminPrivate>
+                <ClassesList />
+              </AdminPrivate>
+            ),
           },
           {
             path: "/dashboard/courses/list",
-            element: <CoursesList />,
+            element: (
+              <AdminPrivate>
+                <CoursesList />
+              </AdminPrivate>
+            ),
           },
           {
             path: "/dashboard/addaclass",
