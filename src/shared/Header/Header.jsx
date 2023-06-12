@@ -11,6 +11,8 @@ import {
   MdOutlineKeyboardArrowUp,
   MdOutlineMenuOpen,
 } from "react-icons/md";
+import { useInstructor } from "../../Hooks/useInstructor";
+import { useAdmin } from "../../Hooks/useAdmin";
 const Header = () => {
   const { user, logOut } = useAuth();
   const { cart } = useCart();
@@ -20,6 +22,8 @@ const Header = () => {
     setActive(false);
   }, [location]);
   const [isHidden, setHidden] = useState(false);
+  const { isAdmin, isLoading } = useAdmin();
+  const { isInstructor: instructor } = useInstructor();
   return (
     <div className="shadow z-10">
       <div className="mx-auto container">
@@ -48,18 +52,20 @@ const Header = () => {
                 <Link to="/about">About</Link>
               </ul>
             </div>
-            <div className="space-x-12 font-inter">
+            <div className="space-x-12 font-inter lg:mt-3">
               {user ? (
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2  cursor-pointer relative">
-                  <Link
-                    to="/dashboard/cart"
-                    className=" text-2xl gap-0 me-4 relative mt-4 lg:mt-0"
-                  >
-                    <AiOutlineShoppingCart></AiOutlineShoppingCart>
-                    <small className="absolute -top-3 left-3 bg-red-600 rounded-full py-0 text-sm px-1 text-white">
-                      {(cart && cart?.length) || 0}
-                    </small>
-                  </Link>
+                  {!isAdmin && !instructor && (
+                    <Link
+                      to="/dashboard/cart"
+                      className=" text-2xl gap-0 me-4 relative mt-4 lg:mt-0"
+                    >
+                      <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                      <small className="absolute -top-3 left-3 bg-red-600 rounded-full py-0 text-sm px-1 text-white">
+                        {(cart && cart?.length) || 0}
+                      </small>
+                    </Link>
+                  )}
                   <div
                     className="flex gap-2 items-center mb-3"
                     onClick={() => setActive(!isActive)}
