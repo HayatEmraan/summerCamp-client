@@ -16,12 +16,12 @@ import Loader from "../libs/Loader/Loader";
 
 export const AuthContext = createContext(null);
 
-const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const auth = getAuth(app);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    setLoading(false);
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -73,13 +73,10 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         setUser(null);
-        Cookies.remove("access_token");
         setLoading(false);
       }
     });
-    return () => {
-      return unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
   const authInfo = {
     user,

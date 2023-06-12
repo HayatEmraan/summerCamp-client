@@ -58,7 +58,7 @@ const Header = () => {
                   {!isAdmin && !instructor && (
                     <Link
                       to="/dashboard/cart"
-                      className=" text-2xl gap-0 me-4 relative mt-4 lg:mt-0"
+                      className=" text-2xl gap-0 me-4 relative mt-4 lg:-mt-2"
                     >
                       <AiOutlineShoppingCart></AiOutlineShoppingCart>
                       <small className="absolute -top-3 left-3 bg-red-600 rounded-full py-0 text-sm px-1 text-white">
@@ -117,12 +117,14 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <Link
-                  to="/signin"
-                  className="border py-2 px-4 rounded-lg hover:bg-[#FFE699] border-[#ffc000]"
-                >
-                  Sign In
-                </Link>
+                <div className="mb-3">
+                  <Link
+                    to="/signin"
+                    className="border py-2 px-4 rounded-lg hover:bg-[#FFE699] border-[#ffc000]"
+                  >
+                    Sign In
+                  </Link>
+                </div>
               )}
             </div>
           </div>

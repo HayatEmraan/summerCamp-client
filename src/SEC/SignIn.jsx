@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import logo from "../assets/logo/logo.jpg";
@@ -8,6 +7,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { useGoogle } from "../Hooks/useGoogle";
+import { Helmet } from "react-helmet-async";
 const SignIn = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,15 +28,14 @@ const SignIn = () => {
         });
     }
   };
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+
   const [eyeActive, setEyeActive] = useState(false);
-  const onSubmit = (data) => {
-    signIn(data.email, data.password)
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const middle = e.target;
+    const email = middle.email.value;
+    const password = middle.password.value;
+    signIn(email, password)
       .then((res) => {
         toast.success("Successfully logged In!");
         navigate(from, { replace: true });
@@ -68,6 +67,7 @@ const SignIn = () => {
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <Helmet>SignIn | E-Learning</Helmet>
       <div className="container mx-auto w-1/4 border p-8 shadow-md rounded-xl">
         <Link to="/">
           <img src={logo} alt="" />
@@ -84,14 +84,12 @@ const SignIn = () => {
             <p>Continue with Google</p>
           </div>
           <div className="divider mb-20">or</div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col space-y-6"
-          >
+          <form onSubmit={handleLogin} className="flex flex-col space-y-6">
             <input
               type="email"
               className="border-b border-gray-400 focus:outline-none"
-              {...register("email", { required: true })}
+              name="email"
+              required
               placeholder="Email"
               ref={emailRef}
             />
@@ -99,7 +97,8 @@ const SignIn = () => {
               <input
                 type={`${eyeActive ? "text" : "password"}`}
                 className="border-b border-gray-400 focus:outline-none w-full"
-                {...register("password", { required: true })}
+                name="password"
+                required
                 placeholder="Password"
               />
               <div className="absolute top-0 right-0 text-xl cursor-pointer">
@@ -119,7 +118,7 @@ const SignIn = () => {
                 Reset Password
               </small>
             </div>
-            {loading ? (
+            {/* {loading ? (
               <div className="bg-black text-white text-3xl rounded-md py-2">
                 <CgSpinnerTwo
                   className="animate-spin mx-auto"
@@ -132,7 +131,12 @@ const SignIn = () => {
                 value="Sign In"
                 className="bg-black text-white py-2 rounded-md cursor-pointer text-xl font-semibold"
               />
-            )}
+            )} */}
+            <input
+              type="submit"
+              value="Sign In"
+              className="bg-black text-white py-2 rounded-md cursor-pointer text-xl font-semibold"
+            />
           </form>
           <div className="mt-8 text-center">
             <p className="px-6 text-sm text-center text-gray-400">

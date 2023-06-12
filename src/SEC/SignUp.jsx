@@ -12,6 +12,7 @@ import logo from "../assets/logo/logo.jpg";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { toast } from "react-hot-toast";
 import { useGoogle } from "../Hooks/useGoogle";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const location = useLocation();
@@ -103,6 +104,7 @@ const SignUp = () => {
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <Helmet>SignUp | E-Learning</Helmet>
       <div className="container mx-auto w-1/4 border p-8 shadow-md rounded-xl">
         <Link to="/">
           <img src={logo} alt="" />
